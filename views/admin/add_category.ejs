@@ -1,0 +1,19 @@
+<%- include("../_layouts/adminheader") %>
+<br/><br/>
+
+<h2 class="page-title text-warning letter" >Add a category</h2>
+<a href="/admin/categories" class="vd text-danger letter2"><i class='bx bx-rotate-left'></i> Back to all categories</a>
+<br><br>
+
+<form method="post" action="/admin/categories/add-category">
+
+    <div class="form-group">
+        <label for="" class="text-warning letter2">Title</label>
+        <input type="text" class="form-control letter2" name="title" value="<%= title %>" placeholder="Title">
+    </div>
+
+    
+    <button class="btn btn-success letter2 btn-sm">Submit</button>
+</form>
+
+<%- include("../_layouts/adminfooter") %>

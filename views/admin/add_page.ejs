@@ -1,0 +1,28 @@
+<%- include("../_layouts/adminheader") %>
+<br/><br/>
+
+<h2 class="page-title text-warning letter">Add a page</h2>
+<a href="/admin/pages" class="vd text-danger letter2"><i class='bx bx-rotate-left'></i> Back to all pages</a>
+<br><br>
+
+<form method="post" action="/admin/pages/add-page">
+
+    <div class="form-group">
+        <label for="" class="text-warning letter2">Title</label>
+        <input type="text" class="form-control letter2" name="title" value="<%= title %>" placeholder="Title">
+    </div>
+
+    <div class="form-group">
+        <label for="" class="text-warning letter2">Slug</label>
+        <input type="text" class="form-control letter2" name="slug" value="<%= slug %>" placeholder="Slug">
+    </div>
+
+    <div class="form-group">
+        <label for="" class="text-warning letter2">Content</label>
+        <textarea name="content" class="letter2" cols="30" rows="10"><%= content %></textarea>
+    </div>
+
+    <button class="btn btn-success letterB">Submit</button>
+</form>
+
+<%- include("../_layouts/adminfooter") %>

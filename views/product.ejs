@@ -1,0 +1,38 @@
+<%- include("_layouts/header") %>
+
+<div class="row">
+
+    <h1 class="page-header text-warning letter"><%= p.title %></h1>
+
+    <div class="col-xs-12 col-md-5">
+        <img class="spi card" src="/product_images/<%= p.id %>/<%= p.image %>" alt="">
+        <br>
+    </div>
+    <div class="col-xs-12 col-md-7">
+        <p class="text-warning letter2"><%= p.desc %></p>
+        <p class="text-warning letter2">$<%= parseFloat(p.price).toFixed(2) %></p>
+        <% if (loggedIn) { %>
+            <p><a class="vd text-danger letter2" href="/cart/add/<%= p.slug %>"><i class='bx bx-cart-alt'></i> Add to cart</a></p>
+            <% } else {%>
+            <p class="letter2">You must be logged in to purchase items.</p>
+            <% } %>         
+    </div>
+    <div class="col-xs-12">
+        
+        <ul class="gallery">
+
+            <% galleryImages.forEach(function(image){ %>
+            <% if (image != "thumbs") { %>
+            <li>                
+                <a data-fancybox="gallery" href="/product_images/<%= p.id %>/gallery/<%= image %>">
+                    <img src="/product_images/<%= p.id %>/gallery/thumbs/<%= image %>" alt="">
+                </a>
+            </li>
+            <% } %>
+            <% }); %>
+        </ul>
+
+    </div>
+    
+</div>
+<%- include("_layouts/footer") %>

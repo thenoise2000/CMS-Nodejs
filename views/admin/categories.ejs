@@ -1,0 +1,30 @@
+<%- include("../_layouts/adminheader") %>
+
+<h2 class="page-title text-warning letter" style="margin-top: 5%;">Categories</h2>
+<a href="/admin/categories/add-category" class="vd text-primary letter2"><i class='bx bxs-duplicate'></i> Add new category</a>
+<br><br>
+
+<table class="table table-striped">
+
+    <thead>
+        <tr class="home">
+            <th class="letter2">Category</th>
+            <th class="letter2">Edit</th>
+            <th class="letter2">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% categories.forEach(function(cat){ %>
+            <tr>
+                <td class="letter2"><%= cat.title %></td>
+                <td><a class="btn btn-primary btn-sm" href="/admin/categories/edit-category/<%= cat._id %>"><i class='bx bxs-pencil' ></i> Edit</a></td>
+                <td><a class="confirmDeletion btn btn-danger btn-sm" href="/admin/categories/delete-category/<%= cat._id %>"><i class='bx bxs-trash-alt'></i> Delete</a></td>
+                              
+            </tr>
+      <%  }) %>
+    </tbody>
+</table>
+
+       
+
+<%- include("../_layouts/adminfooter") %>

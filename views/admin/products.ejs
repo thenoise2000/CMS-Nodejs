@@ -1,0 +1,45 @@
+<%- include("../_layouts/adminheader") %>
+<br><br>
+<h2 class="page-title text-warning letter">Products</h2>
+<a href="/admin/products/add-product" class="vd text-primary letter2"><i class='bx bxs-duplicate'></i> Add new product</a>
+<br><br>
+
+<% if (count > 0) { %>
+
+<table class="table table-striped alignmiddle">
+
+    <thead>
+        <tr class="home">
+            <th class="letter text-warning">Product</th>
+            <th class="letter text-warning"">Price</th>
+            <th class="letter text-warning"">Category</th>
+            <th class="letter text-warning"">Product Image</th>
+            <th class="letter text-warning"">Edit</th>
+            <th class="letter text-warning"">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% products.forEach(function(product){ %>
+            <tr>
+                <td class="letter2 animated fadeInLeft"><%= product.title %></td>
+                <td class="letter2 animated fadeInLeft"><%= parseFloat(product.price).toFixed(2) %></td>
+                <td class="letter2 animated fadeInLeft"><%= product.category %></td>
+                <td>
+                <% if (product.image == "") { %>
+                    <img id="noimage" class="card animated fadeInRight" src="/images/noimage.png" alt="">
+                <% } else { %>    
+                    <img id="noimage" class="card animated fadeInRight" src="/product_images/<%= product.image %>" width="25%" height="25%"> 
+                <% } %>    
+                </td>        
+                <td><a class="btn btn-primary letterB" href="/admin/products/edit-product/<%= product._id %>"><i class='bx bxs-edit'></i>Edit</a></td>
+                <td><a class="btn btn-danger letterB confirmDeletion" href="/admin/products/delete-product/<%= product._id %>"><i class='bx bx-task-x'></i>Delete</a></td>
+                </tr>
+      <%  }) %>
+    </tbody>
+</table>
+
+<% } else { %>
+ <h3 class="text-center">There are not products</h3>
+<% } %>
+
+<%- include("../_layouts/adminfooter") %>

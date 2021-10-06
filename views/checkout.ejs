@@ -1,0 +1,92 @@
+<%- include("_layouts/header") %>
+
+<% if (typeof cart !== "undefined") { %>
+
+    <h1 class="page-title text-warning letter">My cart</h1>
+    <br><br>
+
+    <table class="table card table-striped alignmiddle">
+
+        <tr>
+            <th class="letter">Image</th>
+            <th class="letter">Title</th>
+            <th class="letter">Price</th>
+            <th class="letter">Quantity</th>
+            <th></th>
+            <th class="letter">Subtotal</th>
+        </tr>
+
+        <% var total = 0; %>
+        <% cart.forEach(function(product){ %>
+        <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+        <% total += +sub %>
+            <tr>
+                <td><img class="cpi card"  src="<%= product.image %>" alt=""></td>
+                <td class="letter2"><%= product.title %></td>
+                <td class="letter2"><%= product.price %></td>
+                <td class="letter2"><%= product.qty %></td>
+                <td>
+                    <a class="btn btn-success" href="/cart/update/<%= product.title %>?action=add"><i class='bx bx-plus-circle'></i></a>&nbsp;
+                    <a class="btn btn-danger" href="/cart/update/<%= product.title %>?action=remove"><i class='bx bx-minus-circle'></i></a>&nbsp;
+                    <a class="btn btn-warning letterB" href="/cart/update/<%= product.title %>?action=clear"><i class='bx bxs-brush'></i>Clear</a>&nbsp;
+                </td>
+                <td class="letter2">$<%= sub %></td>
+            </tr>            
+        <% }) %>
+        <tr>
+            <td class="text-primary letter2" colspan="6" align="right"><b>Total: </b> $<%= parseFloat(total).toFixed(2) %></td>
+        </tr>
+        <tr>
+            <td colspan="5" align="right">
+                 <a class="clearcart btn btn-warning letterB" href="/cart/clear">Clear cart</a>
+            </td>
+            <td colspan="5" align="right">
+                <a class="btn btn-danger buynow letterB" href="#">Buy now</a>
+           </td>
+        </tr>
+    </table>
+
+    <form class="pp" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_cart">
+        <input type="hidden" name="upload" value="1">
+        <input type="hidden" name="business" value="jultranet-facilitator@gmail.com">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="hidden" name="amount" value="<%= total %>">
+        <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+        <% var num = 0; %>
+        <% cart.forEach(function(p){ %>
+        <% num++ %>
+        <input type="hidden" name="item_name_<%= num %>" value="<%= p.title %>">
+        <input type="hidden" name="amount_<%= num %>" value="<%= p.price %>">
+        <input type="hidden" name="quantity_<%= num %>" value="<%= p.qty %>">
+        <% }); %>
+
+    </form>
+
+    <% } else { %>
+        <h3 class="text-center text-warning letter">Cart empty.</h3>
+        <% } %>
+
+    <script>
+
+        $(function() {
+
+            $('a.clearcart').on('click', function () {
+        if (!confirm('Confirm clear cart'))
+            return false;
+        });
+
+        $('a.buynow').on('click', function (e) {
+        e.preventDefault();
+        
+        $.get('/cart/buynow', function() {
+            $('form.pp input[type=image]').click();
+            $('.ajaxbg').show();
+        });
+    });
+        
+});
+
+
+    </script>
+<%- include("_layouts/footer") %>

@@ -1,0 +1,21 @@
+<% include _layouts/header %>
+
+<h1 class="text-warning letter"><%= title %></h1>
+
+<form method="post" action="/users/login">
+
+    <div class="form-group">
+        <label class="text-warning letter2">Username</label>
+        <input type="text" name="username" class="form-control letter2" placeholder="Username">
+    </div>
+
+    <div class="form-group">
+        <label class="text-warning letter2">Password</label>
+        <input type="password" name="password" class="form-control letter2"  placeholder="Password">
+    </div>
+
+    <button type="submit" class="btn btn-primary letterB">Log in</button>
+
+</form>
+
+<% include _layouts/footer %>
